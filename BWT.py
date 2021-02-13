@@ -56,21 +56,36 @@ def BWT(file):
 def BWT_decypher(compressed_BWT, combinations = None):
 
     if combinations is None:
-        combinations = {}
+        combinations = []
 
-    for i in range(0, len(compressed_BWT), 1):
+    if len(combinations) < len(compressed_BWT):
+        for elem in compressed_BWT:
+
+            combinations.append([elem])
+
+        BWT_decypher(compressed_BWT,sorted(combinations))
+
+    else:
+
+        for attempts, element in zip(combinations, compressed_BWT):
+            attempts.insert(0, element)
+
+        if len(combinations[-1]) != len(compressed_BWT):
+
+            BWT_decypher(compressed_BWT,sorted(combinations))
 
 
-        if len(combinations.values()) > len(combinations.keys()):
-            combinations[i].append([compressed_BWT[i]])
+    final_comb = sorted(combinations)
 
-        else:
-            combinations[i] = [compressed_BWT[i]]
-        print(combinations)
+    for attempts in final_comb:
+        if attempts.index("$") == len(compressed_BWT)-1:
 
-    BWT_decypher(compressed_BWT,sorted(combinations))
+            return(''.join(attempts[:len(compressed_BWT)-1]))
 
-    return(combinations)
+
+
+
+
 
 
 
@@ -79,4 +94,5 @@ def BWT_decypher(compressed_BWT, combinations = None):
 
 
 os.chdir("/Users/mirandolaleonardo/github/Algo_project")#REMOVE WHEN YOU LL WORK ON GUI
+print(BWT("test.txt"))
 print(BWT_decypher(BWT("test.txt")))
