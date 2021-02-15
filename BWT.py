@@ -3,7 +3,7 @@
 
 import os #REMOVE WHEN YOU LL WORK ON GUI
 
-def combinations_recurs(sequence, combinations):
+def combinations_recurs(sequence, combinations, verbose = None):
     """
     Arguments: Nucleotide sequence, list of all the possible combinations
 
@@ -59,7 +59,7 @@ def combinations_recurs(sequence, combinations):
         #return a list of all the combinations
         return combinations
 
-def BWT(file):
+def BWT(file, verbose = None):
     """
     Arguments: Takes a nucleotide file
     Description: Do a Burrows Weeler Compression/Transformation
@@ -99,7 +99,7 @@ def BWT(file):
     #return the compressed BWT string
     return result
 
-def BWT_decypher(compressed_BWT, combinations = None):
+def BWT_decypher(compressed_BWT, combinations = None, verbose = None):
     """
     Arguments: The compressed BWT nucleotide sequence, doesn't need a second
                 argument because it will do it automatically during the recursion
@@ -155,6 +155,6 @@ def BWT_decypher(compressed_BWT, combinations = None):
             return(''.join(attempts[:len(compressed_BWT)-1]))
 
 
-os.chdir("/Users/mirandolaleonardo/github/Algo_project")#REMOVE WHEN YOU LL WORK ON GUI
+"""os.chdir("/Users/mirandolaleonardo/github/Algo_project")#REMOVE WHEN YOU LL WORK ON GUI
 print(BWT("test.txt"))
-print(BWT_decypher(BWT("test.txt")))
+print(BWT_decypher(BWT("test.txt")))"""
