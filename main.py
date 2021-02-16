@@ -59,6 +59,8 @@ def BWT_window():
     tk.Label(newWindow,
           text ="BWT Window Work in progress").pack(side=tk.TOP)
 
+    tk.Button(newWindow, text = "show step by step")
+
     file_opener = tk.Button(newWindow, text = "Open file and RUN", command = openfile)
 
     file_opener.pack(side=tk.BOTTOM)

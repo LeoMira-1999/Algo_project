@@ -1,84 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
-class Node:
-    """
-    Nodes for binary tree usage
-    """
-
-    def __init__(self, parent_node):
-        self.parent_node = parent_node
-        self.left = None
-        self.right = None
-
-    def __str__(self): #permet la lecture en profondeur
-        if self.is_leaf():
-            return str(self.parent_node)
-
-        return "["+str(self.left) +":"+ str(self.right) + "]" + str(self.parent_node)
-
-    def print_tree_node(self):
-        """
-        Print a list like view of the BT
-        """
-        if self.left:
-            self.left.print_tree_node()
-        print(self.parent_node)
-
-        if self.right:
-            self.right.print_tree_node()
-
-    def is_leaf(self):
-        """
-        return True or False if self is a leaf or not
-        """
-        return self.left is None and self.right is None
-
-    def delete_node(self, target_node):
-
-        if target_node < self.parent_node:
-            self.left.delete_node(target_node)
-        elif target_node > self.parent_node:
-            self.right.delete_node(target_node)
-        elif target_node == self.parent_node:
-            self.parent_node = None
-
-    def add_node(self, node):
-        """
-        Add a int node arranged by size of number
-        """
-        if self.parent_node:
-            if node < self.parent_node:
-                if self.left is None:
-                    self.left = Node(node)
-                else:
-                    self.left.add_node(node)
-            elif node > self.parent_node:
-                if self.right is None:
-                    self.right = Node(node)
-                else:
-                    self.right.add_node(node)
-        else:
-            self.parent_node = node
-
-class Tree:
-    """
-    Tree uses Nodes from binary tree to print and show it
-    """
-
-    def __init__(self, node):
-        self.node = node
-
-    def __repr__(self):
-        pass
-
-    def transversal_deep(self): #permet de faire une vue en profondeur avec __str__ de Node
-        """
-        Print tree
-        """
-        print(self.node)
-
+from heapq import heapify, heappop, heappush
 
 def freq_counter(seq):
 
@@ -89,4 +12,32 @@ def freq_counter(seq):
             dico[nucl] = 1
         else:
             dico[nucl] += 1
-    return dico
+    return dict(sorted(dico.items(), key=lambda item: item[1]))
+
+def huffman_tree(occurrences):
+
+    # Tree construction with nucl as leafs
+    tree = [(occ, nucl) for (nucl, occ) in occurrences.items()]
+    print(tree)
+    heapify(tree)
+
+    # Creating the tree with node values 0 or 1
+    while len(tree) > 1:
+
+        # node with smallest weight
+        occ1, node1 = heappop(tree)
+        print(type(occ1), node1)
+        # node of second smallest weight
+        occ2, node2 = heappop(tree)
+
+        # Push (add) onto the tree occ1 + occ2 and give 0 or 1 to the nodes
+        heappush(tree, (occ1 + occ2, {0: node1, 1: node2}))
+
+    return heappop(tree)[1]
+
+
+def binary_code(dico):
+
+    for binary, node 
+
+print(huffman_tree(freq_counter("ATCGCGAGCGAGAATCGCTAGCTTATCTAGCAGGCGATCGGGATTCGAGGCTAGCGTAGCGGCTGAGCTAGCGAT")))

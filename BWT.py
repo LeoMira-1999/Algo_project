@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os #REMOVE WHEN YOU LL WORK ON GUI
+"""import os #REMOVE WHEN YOU LL WORK ON GUI"""
 
 def combinations_recurs(sequence, combinations, verbose = None):
     """
