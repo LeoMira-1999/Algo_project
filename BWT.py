@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""import os #REMOVE WHEN YOU LL WORK ON GUI"""
-
-def combinations_recurs(sequence, combinations, verbose = None):
+def combinations_recurs(sequence, combinations):
     """
     Arguments: Nucleotide sequence, list of all the possible combinations
 
@@ -59,10 +57,12 @@ def combinations_recurs(sequence, combinations, verbose = None):
         #return a list of all the combinations
         return combinations
 
-def BWT(file, verbose = None):
+def BWT(file):
     """
     Arguments: Takes a nucleotide file
-    Description: Do a Burrows Weeler Compression/Transformation
+
+    Description: Do a Burrows Weeler Transformation
+    
     Returns: A string with the compressed sequence
     """
 
@@ -97,21 +97,21 @@ def BWT(file, verbose = None):
         result += elem[-1]
 
     #return the compressed BWT string
-    return result
+    return result, sort_combinations, combinations
 
-def BWT_decypher(compressed_BWT, combinations = None, verbose = None):
+def BWT_decypher(compressed_BWT, combinations = None):
     """
     Arguments: The compressed BWT nucleotide sequence, doesn't need a second
                 argument because it will do it automatically during the recursion
 
     Returns: The original sequence as a string
     """
-
     #if combination hasn't been given as argument
     if combinations is None:
 
         #initialise combination list empty
         combinations = []
+
 
     #if the length of combinations list isn't as long as the BWT sequence
     if len(combinations) < len(compressed_BWT):
@@ -143,7 +143,6 @@ def BWT_decypher(compressed_BWT, combinations = None, verbose = None):
 
     #the final combination is combinations sorted
     final_comb = sorted(combinations)
-
     #iter through final combinations
     for attempts in final_comb:
 
@@ -151,10 +150,5 @@ def BWT_decypher(compressed_BWT, combinations = None, verbose = None):
         if attempts.index("$") == len(compressed_BWT)-1:
 
             #transform the selected attempt into a string and remove the $ at
-            # end
+            # the end
             return(''.join(attempts[:len(compressed_BWT)-1]))
-
-
-"""os.chdir("/Users/mirandolaleonardo/github/Algo_project")#REMOVE WHEN YOU LL WORK ON GUI
-print(BWT("test.txt"))
-print(BWT_decypher(BWT("test.txt")))"""
